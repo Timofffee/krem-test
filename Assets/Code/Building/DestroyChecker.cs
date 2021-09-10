@@ -11,6 +11,7 @@ public class DestroyChecker : MonoBehaviour
     [SerializeField] private Transform destroyedPrefab;
     [SerializeField] private float maxMagnitude = 4.0f;
     private bool alreadyDestroyed = false;
+    private Quaternion angleFix = Quaternion.Euler(90, 0, 0);
 
     public UnityEvent onDestroyed = new UnityEvent();
 
@@ -24,6 +25,8 @@ public class DestroyChecker : MonoBehaviour
     {
         if (alreadyDestroyed)
             return;
+        
+        // Calculate velocity
         var vel = (other.rigidbody ? other.rigidbody.velocity : Vector3.up*2) - rb.velocity;
 
         if (vel.magnitude >= maxMagnitude)
@@ -51,7 +54,8 @@ public class DestroyChecker : MonoBehaviour
     private Transform MakeDestroyed()
     {
         alreadyDestroyed = true;
-        Transform obj = Instantiate(destroyedPrefab, transform.position, transform.rotation * Quaternion.Euler(90, 0, 0));
+        Transform obj = Instantiate(destroyedPrefab, transform.position, transform.rotation * angleFix);
+        obj.parent = transform.parent;
         Destroy(gameObject);
         return obj;
     }
