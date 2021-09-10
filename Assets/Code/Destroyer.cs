@@ -7,9 +7,6 @@ public class Destroyer : MonoBehaviour
 {
     const String TAG_DESTRUCT = "can_destroyed";
     private Camera m_MainCamera;
-    
-    // ---
-    public Transform prefab;
 
     private void Start()
     {
@@ -25,8 +22,7 @@ public class Destroyer : MonoBehaviour
             {
                 if (hit.collider.CompareTag(TAG_DESTRUCT))
                 {
-                    Instantiate(prefab, hit.transform.position, hit.transform.rotation * Quaternion.Euler(new Vector3(90, 0, 0)));
-                    Destroy(hit.transform.gameObject);
+                    hit.transform.GetComponent<DestroyChecker>().Explode(hit.point);
                 }
             }
         }

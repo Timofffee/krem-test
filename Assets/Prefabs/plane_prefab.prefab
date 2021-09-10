@@ -44,6 +44,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyedPrefab: {fileID: 384770421290697615, guid: 02e16aa1f25b9dd43983d2120798387e,
     type: 3}
+  maxMagnitude: 2.5
+  onDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &4266695836055463393
 PrefabInstance:
   m_ObjectHideFlags: 0
